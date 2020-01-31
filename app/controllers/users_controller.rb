@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     def show
-        user = User.find_by(email_address: params[:email_address])
+        user = User.find_by(id: params[:id])
         questions = user.questions
         question_objects = questions.map{|question| {question: question, choices: question.choices, decision: question.decision.choice }}
         user_object = {
@@ -13,9 +13,10 @@ class UsersController < ApplicationController
     end
 
     def create 
-        user = User.find_by(email_address: params[:email_address])
+
+        user = User.find_by(email: params[:email])
         if (!user)
-            user = User.create(email_address: params[:email_address])
+            user = User.create(email: params[:email], name: params[:name])
         end
 
         questions = user.questions
@@ -36,6 +37,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:id, :name, :email_address)
+        params.require(:user).permit(:id, :name, :email)
     end
 end
