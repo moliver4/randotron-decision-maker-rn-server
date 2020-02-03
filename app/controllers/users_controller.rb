@@ -20,11 +20,18 @@ class UsersController < ApplicationController
         end
 
         questions = user.questions
-        question_objects = questions.map{|question| {question: question, choices: question.choices, decision: question.decision.choice }}
-        user_object = {
-            user: user,
-            questions: question_objects
-        }
+        if (questions.length > 0)
+            question_objects = questions.map{|question| {question: question, choices: question.choices, decision: question.decision.choice }}
+            user_object = {
+                user: user,
+                questions: question_objects
+            }
+        else 
+            user_object = {
+                user: user,
+                questions: []
+            }
+        end
         render json: user_object
     end
 

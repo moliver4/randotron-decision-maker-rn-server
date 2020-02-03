@@ -6,13 +6,24 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        question = Question.create(question_params)
-        render json: question
+        puts('hello')
+        puts(params[:choices])
+        puts('hello????')
+        question = Question.create(title: params[:title], user_id: params[:user_id])
+
+        choices = params[:choices].map{|choice| Choice.create(title: choice[:title], weight: choice[:weight], question_id: question.id)}
+
+        qc=question.choices
+        question_object = {
+            question: question,
+            choices: qc
+        }
+        render json: question_object
     end
 
     def update
         question = Question.find_by(id: params[:id])
-        question.update(question_params)
+        question.update(params)
         render json: question
     end
 
@@ -27,11 +38,11 @@ class QuestionsController < ApplicationController
         render json: temp
     end
 
-    private
+    # private
 
-    def question_params
-        params.require(:question).permit(:id, :title, :user_id)
-    end
+    # def question_params
+    #     params.require(:question).permit(:id, :title, :user_id, :choices => [:title, :weight])
+    # end
 
 
 end

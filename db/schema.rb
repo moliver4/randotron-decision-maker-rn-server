@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2020_01_30_180249) do
 
   create_table "choices", force: :cascade do |t|
     t.string "title"
-    t.string "reason", default: ""
     t.integer "weight", default: 0
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -43,8 +42,8 @@ ActiveRecord::Schema.define(version: 2020_01_30_180249) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "user@gmail.com"
-    t.string "name", default: "User"
+    t.string "email"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

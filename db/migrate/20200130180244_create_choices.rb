@@ -2,7 +2,6 @@ class CreateChoices < ActiveRecord::Migration[6.0]
   def change
     create_table :choices do |t|
       t.string :title
-      t.string :reason, :default => ''
       t.integer :weight, :default => 0
       t.references :question, null: false, foreign_key: true
 
