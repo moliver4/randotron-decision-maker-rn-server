@@ -6,11 +6,9 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        puts('hello')
-        puts(params[:choices])
-        puts('hello????')
+    
         question = Question.create(title: params[:title], user_id: params[:user_id])
-
+   
         choices = params[:choices].map{|choice| Choice.create(title: choice[:title], weight: choice[:weight], question_id: question.id)}
 
         qc=question.choices
@@ -41,7 +39,8 @@ class QuestionsController < ApplicationController
     # private
 
     # def question_params
-    #     params.require(:question).permit(:id, :title, :user_id, :choices => [:title, :weight])
+    #     # params.require(:group).permit(:group_name, :group_title, choices: [:id, :darknet_accountname, :access_level])
+    #     params.require(:question).permit(:id, :title, :user_id, choices: [:weight, :title])
     # end
 
 

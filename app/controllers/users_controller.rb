@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
         questions = user.questions
         if (questions.length > 0)
-            question_objects = questions.map{|question| {question: question, choices: question.choices, decision: question.decision.choice }}
+            question_objects = questions.map{|question| {question: question, choices: question.choices, decision: {id: question.decision.id, choice: question.decision.choice}}}
             user_object = {
                 user: user,
                 questions: question_objects

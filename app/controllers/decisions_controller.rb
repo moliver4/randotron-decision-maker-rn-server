@@ -11,13 +11,16 @@ class DecisionsController < ApplicationController
 
     def create
         decision = Decision.create(decision_params)
-        render json: decision
+        decision_obj={id: decision.id, choice: decision.choice}
+        render json: decision_obj
     end
 
     def update
         decision = Decision.find_by(id: params[:id])
         decision.update(decision_params)
-        render json: decision
+
+        decision_obj={id: decision.id, choice: decision.choice}
+        render json: decision_obj
     end
 
     def destroy
