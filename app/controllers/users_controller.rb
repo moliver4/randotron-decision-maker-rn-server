@@ -3,12 +3,20 @@ class UsersController < ApplicationController
     def show
         user = User.find_by(id: params[:id])
         questions = user.questions
-        question_objects = questions.map{|question| {question: question, choices: question.choices, decision: question.decision.choice }}
-        user_object = {
-            user: user,
-            questions: question_objects
-        }
-        # render json: user_object
+        if (questions.length > 0)
+            sorted = questions.sort_by{|question| question.decision.updated_at}.reverse()
+
+            question_objects = sorted.map{|question| {question: question, choices: question.choices, decision: {id: question.decision.id, choice: question.decision.choice}}}
+            user_object = {
+                user: user,
+                questions: question_objects
+            }
+        else 
+            user_object = {
+                user: user,
+                questions: []
+            }
+        end
         render json: user_object
     end
 
@@ -21,7 +29,8 @@ class UsersController < ApplicationController
 
         questions = user.questions
         if (questions.length > 0)
-            question_objects = questions.map{|question| {question: question, choices: question.choices, decision: {id: question.decision.id, choice: question.decision.choice}}}
+            sorted = questions.sort_by{|question| question.decision.updated_at}.reverse()
+            question_objects = sorted.map{|question| {question: question, choices: question.choices, decision: {id: question.decision.id, choice: question.decision.choice}}}
             user_object = {
                 user: user,
                 questions: question_objects
