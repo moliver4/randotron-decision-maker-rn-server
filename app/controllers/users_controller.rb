@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     
         if (questions.length > 0)
             sorted = questions.sort_by{|question| question.decision.updated_at}.reverse()
-            question_objects = sorted[0,5].map{|question| {question: question, choices: question.choices, decision: {id: question.decision.id, choice: question.decision.choice}}}
+            question_objects = sorted[0,20].map{|question| {question: question, choices: question.choices, decision: {id: question.decision.id, choice: question.decision.choice}}}
             user_object = {
                 user: user,
                 questions: question_objects
