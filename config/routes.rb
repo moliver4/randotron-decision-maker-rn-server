@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :choices
   resources :questions
   resources :users
   resources :decisions
