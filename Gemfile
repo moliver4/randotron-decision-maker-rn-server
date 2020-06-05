@@ -8,7 +8,6 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
 gem "actionview", ">= 6.0.2.2"
 gem "activestorage", ">= 6.0.3.1"
 gem "activesupport", ">= 6.0.3.1"
@@ -44,3 +43,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "websocket-extensions", ">= 0.1.5"
